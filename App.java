@@ -11,6 +11,9 @@ import java.io.*;
 public class App{
 
   public static String theme;
+  public static String themeWord1;
+  public static String themeWord2;
+  public static String themeWord3;
 
   public static void main(String[] args) {
     welcome();
@@ -20,23 +23,60 @@ public class App{
     takingTheme();
   }
   public static void takingTheme() {
-    Scanner themeTaker = new Scanner(System.in);
-    theme = themeTaker.nextLine();
-    System.out.println("Шукаю твори по темі " + theme);
+
+
+    System.out.println("1 слово: ");
+    Scanner themeTaker1 = new Scanner(System.in);
+    themeWord1 = themeTaker1.nextLine();
+    System.out.println("2 слово: ");
+    Scanner themeTaker2 = new Scanner(System.in);
+    themeWord2 = themeTaker2.nextLine();
+    System.out.println("3 слово: ");
+    Scanner themeTaker3 = new Scanner(System.in);
+    themeWord3 = themeTaker3.nextLine();
+
+    System.out.println("Шукаю твори по темі " + themeWord1 + " " + themeWord2 + " " + themeWord3);
     googling();
   }
   public static void googling() {
     try{
-      URI searchURI = new URI("https://www.google.com/search?q=твір+на+тему+" + theme + "&oq=твір+на+тему+" + theme + "&aqs=chrome..69i57j33l5.17195j0j7&sourceid=chrome&ie=UTF-8");
       try{
-      Desktop searching = Desktop.getDesktop();
-      searching.browse(searchURI);
+        if (themeWord2.equals("") && themeWord3.equals("")) {
+          URI searchURI1 = new URI("https://www.google.com/search?q=твір+на+тему+" + themeWord1 + "&oq=твір+на+тему+" + themeWord1 + "&aqs=chrome..69i57j33l5.17195j0j7&sourceid=chrome&ie=UTF-8");
+          try{
+          Desktop searching = Desktop.getDesktop();
+          searching.browse(searchURI1);
+          }
+          catch(IOException e){
+            System.out.println("Error");
+          }
+        }
+        else if (themeWord3.equals("")) {
+          URI searchURI2 = new URI("https://www.google.com/search?q=твір+на+тему+" + themeWord1 + "+" + themeWord2 + "&oq=твір+на+тему+" + themeWord1 + "+" + themeWord2 + "&aqs=chrome..69i57j33l5.17195j0j7&sourceid=chrome&ie=UTF-8");
+          try{
+          Desktop searching = Desktop.getDesktop();
+          searching.browse(searchURI2);
+          }
+          catch(IOException e){
+            System.out.println("Error");
+          }
+        }
+        else {
+          URI searchURI3 = new URI("https://www.google.com/search?q=твір+на+тему+" + themeWord1 + "+" + themeWord2 + "+" + themeWord3 + "&oq=твір+на+тему+" + themeWord1 + "+" + themeWord2 + "+" + themeWord3 + "&aqs=chrome..69i57j33l5.17195j0j7&sourceid=chrome&ie=UTF-8");
+          try{
+          Desktop searching = Desktop.getDesktop();
+          searching.browse(searchURI3);
+          }
+          catch(IOException e){
+            System.out.println("Error");
+          }
+        }
       }
-      catch(IOException e){
+      catch(URISyntaxException e){
         System.out.println("Error");
       }
     }
-    catch(URISyntaxException e){
+    catch(NullPointerException e){
       System.out.println("Error");
     }
     takingData();
